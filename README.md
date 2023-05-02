@@ -44,7 +44,7 @@ This script is a location predictor that finds a set of optimal locations for el
 To run the alogrithm and obtain routing results maually:
 
 #### `python loation_prediction_mclp.py <num_chargers> <city>`
-> `<num_chargers>`: The desired number of optimal charger locations to find. Our model defaults to a value of 50. 
+> `<num_chargers>`: The desired number of optimal charger locations to find. Our model defaults to a value of 50.  
 `<city>`: The desired city to find optimal electric vehicle charger locations within a 75 mile radius (e.g., "Los Angeles" or "San Jose").
 
 The model outputs 3 .html maps: 
