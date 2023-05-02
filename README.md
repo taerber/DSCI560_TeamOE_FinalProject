@@ -39,7 +39,7 @@ Remaining Mileage: 100
 Total Mileage: 200
 
 ### Prediting Charger Locations
-This script is a location predictor that finds a set of optimal locations for electric vehicle chargers. It utilizes an optimization problem model that evaluates sets of charger locations to find which maximizes our evaluation metric: the total population of electric vehicle users within 10 miles of at least one of the stations in the set. To get a pool of potential charger locations to optimize on, our model creates a grid centered on a city (user input, as described below) with 5 mile separation beetween points within the grid. Each point represents a potential charger location. The algorithm also utilizes density-based clustering algorithm HDBSCAN to cluster existing charger locations to facilitate a visualization of current charger coverage; this was an important development of our model such that the efficiency of our model could be visualied in comparing outputted results to the current distribution of chargers.
+This script is a location predictor that finds a set of optimal locations for electric vehicle chargers. It reads two CSV files. First, sales.csv which contains sales numbers for electric vehicles in California by zip code. Second, alt_fuel_stations.csv which contains existing electric vehicle charger locations in California by latitude/longitude.
 
 To run the alogrithm and obtain routing results maually:
 
