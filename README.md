@@ -1,41 +1,59 @@
-How to deploy our website
+## Deployment
 
-Step 1: Save somewhere onto your computer
+In the project directory, run the following 2 commands:
 
-Step 2: open a terminal window
+#### `pip install -r requirements.txt`
 
-Step 3: cd to the location of the FinalProject folder
+#### `python backend.py`
 
-Step 4: run Python backend.py
+This installs all dependences and runs the app. Open the URL given in your terminal to view it in your browser.\
 
-Step 5: copy and paste the url given into a chrome browser(please use chrome as there may be cache problems with other browsers)
+## Task Specifics
+### Routing Drivers
+This script is a route planner that finds a suitable stop location between a start and end address based on the maximum range of an EV and an average speed limit close to 55 mph. It reads a CSV file containing potential charger locations and calculates the route using Google Maps API.
 
-Step 6: Click around on the website! When entering routes please make sure the destination and starting location are far apart, if the locations are too close and the mileage entered is enough to get from point A to B then the routing doesn't work because of the buffer we have added in place(15-50 miles), if this happens just click back to the previous page and retry a different remaining mileage or locations
+To run the alogrithm and obtain routing results maually:
+
+#### `python script.py <start_address> <end_address> <max_distance_miles> <csv_file_path>`
+> `<start_address>`: The starting address (e.g., "123 Main St, Anytown, USA").  
+`<end_address>`: The ending address (e.g., "789 Elm St, Othertown, USA").  
+`<max_distance_miles>`: The maximum distance (in miles) the vehicle can travel before needing to stop.  
+`<csv_file_path>`: The path to the CSV file containing potential stop locations.
+
+When entering routes please make sure the destination and starting location are far apart, if the locations are too close and the mileage entered is enough to get from point A to B then the routing doesn't work because of the buffer we have added for a user's range of 15-50 miles. If this happens, click back to the previous page and retry a different remaining mileage or locations.
 
 Some Example Routes:
-
-Destination: 650 Gateway Center Dr, San Diego, CA 92102
-Current Location: 31790 Oak Ranch CT Westlake Village CA 91361
-Remaining Mileage: 100
+> Destination: 650 Gateway Center Dr, San Diego, CA 92102  
+Current Location: 31790 Oak Ranch CT Westlake Village CA 91361  
+Remaining Mileage: 100  
 Total Mileage: 200
 
-Destination: PIER 39 The Embarcadero &, Beach St, San Francisco, CA 94133
-Current Location: 31790 Oak Ranch CT Westlake Village CA 91361
-Remaining Mileage: 200
+> Destination: PIER 39 The Embarcadero &, Beach St, San Francisco, CA 94133  
+Current Location: 31790 Oak Ranch CT Westlake Village CA 91361  
+Remaining Mileage: 200  
 Total Mileage: 400
 
-Destination: 886 Cannery Row, Monterey, CA 93940
-Current Location: 1 UCEN Rd, Santa Barbara, CA 93106
-Remaining Mileage: 100
+> Destination: 886 Cannery Row, Monterey, CA 93940  
+Current Location: 1 UCEN Rd, Santa Barbara, CA 93106  
+Remaining Mileage: 100  
 Total Mileage: 200
 
-- for our route page when entering locations the map may not refresh, this has to due to how the browser caches, please use Chrome to avoid these problems, if the issue persists then please just clear your browsers history and you can open the 'route_map.html' in the templates folder in a browser and will see the map file does create the correct map but may not refresh in the route html.
+### Prediting Charger Locations
+This script is a location predictor that finds a set of optimal locations for electric vehicle chargers. It utilizes an optimization problem model that evaluates sets of charger locations to find which maximizes our evaluation metric: the total population of electric vehicle users within 10 miles of at least one of the stations in the set. To get a pool of potential charger locations to optimize on, our model creates a grid centered on a city (user input, as described below) with 5 mile separation beetween points within the grid. Each point represents a potential charger location. The algorithm also utilizes density-based clustering algorithm HDBSCAN to cluster existing charger locations to facilitate a visualization of current charger coverage; this was an important development of our model such that the efficiency of our model could be visualied in comparing outputted results to the current distribution of chargers.
 
+To run the alogrithm and obtain routing results maually:
 
-Problems that could arise
+#### `python loation_prediction_mclp.py <num_chargers> <city>`
+> `<num_chargers>`: The desired number of optimal charger locations to find.  
+`<city>`: The desired city to find optimal electric vehicle charger locations within a 75 mile radius.
 
-- for backend to run all the import packages need to be installed
+The model outputs 3 .html maps: 
+- mclp-new-coverage-map.html draws optimal charger locations with 10 mile size circles. This output is best when desiring visual results, for visualizing the coverage of the found optimal configuration of charging stations.
+- mclp-new-location-map.html draws optimal charger locations with simple markers. This output is best when desiring a clean view, for detailed examination of the latitude/longitude optimal locations that the model outputs. 
+- mclp.html draws both a circle and marker as detailed above for each optimal charger location.
 
-- due to computer enviroment differences(since dsci 553 requires us to use an older version of spark and my computer uses anaconda also I have too many versions of spark so the file can't correctly find the same versions) the kmeans_pred.py file cannot be run in the backend.py, so all the html maps that python file reproduces have been pre-created and entered manually into the backend.py, but they are produced by the kmeans_pred.py file and are accurate 
+## Known Issues
 
+- For our route page, when entering locations the map may not refresh. You can open the 'route_map.html' in the templates folder in a browser and see that the map file creates the correct map. This visualization issue is due to how browsers handle caching; due to this, we recommend using the web browser Google Chrome to avoid such problems. If the issue persists, clear your browsers cache. 
 
+- Due to computer enviroment differences, we encountered difficulties importing and running our predictive location algorithm file in the overall project's backend.py. Due to this, we stored our algorithm's .html map output of predicted locations locally. To verify results or utilize the algorithm with different parameters, please follow the steps outline above in "Task Specifics". 
