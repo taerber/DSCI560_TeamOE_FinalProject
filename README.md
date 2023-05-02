@@ -22,7 +22,7 @@ To run the alogrithm and obtain routing results maually:
 
 When entering routes please make sure the destination and starting location are far apart, if the locations are too close and the mileage entered is enough to get from point A to B then the routing doesn't work because of the buffer we have added for a user's range of 15-50 miles. If this happens, click back to the previous page and retry a different remaining mileage or locations.
 
-Some Example Routes:
+Some example routes:
 > Destination: 650 Gateway Center Dr, San Diego, CA 92102  
 Current Location: 31790 Oak Ranch CT Westlake Village CA 91361  
 Remaining Mileage: 100  
