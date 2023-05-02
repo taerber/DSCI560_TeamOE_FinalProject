@@ -41,7 +41,7 @@ Total Mileage: 200
 ### Prediting Charger Locations
 This script is a location predictor that finds a set of optimal locations for electric vehicle chargers. It reads two CSV files. First, sales.csv which contains sales numbers for electric vehicles in California by zip code. Second, alt_fuel_stations.csv which contains existing electric vehicle charger locations in California by latitude/longitude.
 
-To run the alogrithm and obtain routing results maually:
+To run the alogrithm and obtain optimal charger location results maually:
 
 #### `python loation_prediction_mclp.py <num_chargers> <city>`
 > `<num_chargers>`: The desired number of optimal charger locations to find. Our model defaults to a value of 50.  
