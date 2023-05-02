@@ -23,7 +23,7 @@ def maximal_coverage(city, num_predictions=50, state="CA"):
     sc = SparkContext(conf=conf)
 
     # Columns : ['Data Year', 'Fuel Type', 'ZIP', 'Number of Vehicles']
-    data = sc.textFile("New_ZEV_Sales_Last_updated_01-18-2023.csv").filter(lambda row : row.split(',')[2] != 'ZIP')
+    data = sc.textFile("sales.csv").filter(lambda row : row.split(',')[2] != 'ZIP')
     # (zip, number of vehicles)
     # # First filter for sales in last 5 years
     data_rdd = data.filter(lambda row : int(row.split(',')[2]) >= 2018).map(lambda row : (row.split(',')[2], int(row.split(',')[3])))
