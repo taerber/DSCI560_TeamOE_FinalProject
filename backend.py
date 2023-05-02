@@ -9,7 +9,7 @@ import seaborn as sns
 import googlemaps
 import dijkstras
 import dijkstras1
-import kmeans_code
+#import kmeans_code
 ##################################################
 # 	Normal Python Code to Call in Flask Code	 #
 ##################################################
